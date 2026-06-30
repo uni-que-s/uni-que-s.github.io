@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>UniQueS — Universal Quantum Scanner</title>
+<meta name="description" content="UniQueS is the universal quantum scanner: discover quantum-vulnerable cryptography across every language in your codebase and generate the CBOM regulators require — on-prem, so your source never leaves your network." />
+<link rel="icon" type="image/png" href="favicon.png" />
+<meta property="og:title" content="UniQueS — Universal Quantum Scanner" />
+<meta property="og:description" content="Find quantum-vulnerable cryptography in any codebase, and prove your post-quantum readiness with a standards CBOM — on-prem." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0d0f0e; --panel:#141817; --panel-2:#191e1c;
+    --line:#242b28; --line-2:#313a35;
+    --text:#e9ebe7; --muted:#9aa39c; --faint:#6f7873;
+    --accent:#3d8fd6; --accent-deep:#1f5e9e; --accent-ink:#0a1310;
+    --radius:14px; --max:1120px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  .mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+
+  /* wordmark */
+  .word{font-weight:700;letter-spacing:-.01em}
+  .word .a{color:var(--accent)}
+  .word .n{color:var(--text)}
+
+  /* header */
+  header{position:sticky;top:0;z-index:30;backdrop-filter:saturate(140%) blur(10px);background:rgba(13,15,14,.72);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;gap:18px;height:64px}
+  .brand{display:flex;align-items:center;gap:11px}
+  .brand img{height:26px;width:auto;display:block}
+  .brand .word{font-size:20px}
+  .nav .spacer{flex:1}
+  .nav .links{display:flex;gap:22px;align-items:center}
+  .nav .links a{color:var(--muted);font-size:14.5px;font-weight:500}
+  .nav .links a:hover{color:var(--text)}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14.5px;border-radius:10px;padding:10px 16px;border:1px solid transparent;transition:.15s;cursor:pointer;white-space:nowrap}
+  .btn-primary{background:var(--accent);color:var(--accent-ink)}
+  .btn-primary:hover{background:#5aa6ea}
+  .btn-ghost{background:transparent;border-color:var(--line-2);color:var(--text)}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+  @media(max-width:820px){.nav .links{display:none}}
+
+  /* hero */
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero .glow{position:absolute;right:-6%;top:-10%;width:620px;height:620px;background:radial-gradient(circle,rgba(61,143,214,.20),rgba(61,143,214,0) 62%);filter:blur(8px);pointer-events:none}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;padding:78px 0 86px}
+  .kicker{display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);background:rgba(61,143,214,.09);border:1px solid rgba(61,143,214,.22);padding:6px 12px;border-radius:999px;margin-bottom:22px}
+  .kicker .dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+  h1{font-size:clamp(2.3rem,4.6vw,3.5rem);line-height:1.06;letter-spacing:-.025em;font-weight:700;margin:0 0 20px}
+  h1 .hl{color:var(--accent)}
+  .lead{font-size:18.5px;color:var(--muted);max-width:560px;margin:0 0 30px}
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+  .btn-lg{padding:13px 22px;font-size:15.5px}
+  .trust{font-size:13.5px;color:var(--faint);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .trust .sep{color:var(--line-2)}
+  .hero-art{display:flex;justify-content:center;align-items:center}
+  .hero-art img{width:100%;max-width:430px;filter:drop-shadow(0 8px 40px rgba(61,143,214,.10))}
+  @media(max-width:880px){.hero-grid{grid-template-columns:1fr;gap:28px;padding:56px 0 62px}.hero-art{order:-1;max-width:300px;margin:0 auto}.hero-art img{max-width:260px}}
+
+  /* sections */
+  section{padding:74px 0}
+  .eyebrow{font-size:13px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+  h2{font-size:clamp(1.7rem,3vw,2.3rem);line-height:1.15;letter-spacing:-.02em;font-weight:700;margin:0 0 16px}
+  .section-lead{font-size:17px;color:var(--muted);max-width:680px;margin:0 0 40px}
+  .divide{border:0;border-top:1px solid var(--line);margin:0}
+
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:860px){.cards{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:26px}
+  .card .step{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--accent);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+  .card .step b{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:7px;background:rgba(61,143,214,.12);border:1px solid rgba(61,143,214,.25);color:var(--accent);font-weight:700}
+  .card h3{font-size:18.5px;margin:0 0 8px;font-weight:600}
+  .card p{color:var(--muted);font-size:15px;margin:0}
+
+  /* on-prem split */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+  @media(max-width:860px){.split{grid-template-columns:1fr;gap:28px}}
+  .checks{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:14px}
+  .checks li{display:flex;gap:12px;align-items:flex-start;font-size:15.5px;color:var(--text)}
+  .checks li span{color:var(--muted)}
+  .checks .ic{flex:none;margin-top:3px;width:20px;height:20px;border-radius:6px;background:rgba(61,143,214,.12);color:var(--accent);display:grid;place-items:center;font-size:13px;font-weight:700}
+  .codecard{background:#0a0d0c;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .codecard .bar{display:flex;gap:7px;padding:13px 16px;border-bottom:1px solid var(--line)}
+  .codecard .bar i{width:11px;height:11px;border-radius:50%;background:#2a322e;display:block}
+  .codecard pre{margin:0;padding:18px 18px 22px;font-family:"JetBrains Mono",monospace;font-size:13px;line-height:1.7;color:#cdd6d0;overflow-x:auto}
+  .codecard .c-acc{color:var(--accent)}
+  .codecard .c-mut{color:var(--faint)}
+  .codecard .c-warn{color:#e0b46a}
+
+  /* langs */
+  .langs{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+  .chip{border:1px solid var(--line-2);background:var(--panel);color:var(--muted);font-size:13.5px;font-weight:500;padding:7px 13px;border-radius:999px}
+  .chip:hover{border-color:var(--accent);color:var(--text)}
+
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:8px}
+  @media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+  .stat .n{font-size:30px;font-weight:700;letter-spacing:-.02em}
+  .stat .l{font-size:13.5px;color:var(--muted);margin-top:4px}
+
+  /* assessment */
+  .offer{background:linear-gradient(180deg,var(--panel-2),var(--panel));border:1px solid var(--line-2);border-radius:18px;padding:46px;display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
+  @media(max-width:860px){.offer{grid-template-columns:1fr;padding:32px}}
+  .offer h2{margin-bottom:12px}
+  .offer p{color:var(--muted);font-size:16px;margin:0 0 8px}
+  .price{font-size:15px;color:var(--text)}
+  .price b{font-size:34px;font-weight:700;color:var(--accent);letter-spacing:-.02em;vertical-align:-2px}
+  .offer .deliver{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:10px;font-size:14.5px;color:var(--muted)}
+  .offer .deliver li::before{content:"→";color:var(--accent);margin-right:9px}
+
+  /* footer */
+  footer{border-top:1px solid var(--line);padding:46px 0 56px;color:var(--muted);font-size:14px}
+  .foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+  .foot .word{font-size:17px}
+  .foot a{color:var(--muted)}.foot a:hover{color:var(--accent)}
+  .foot .meta{font-size:13px;color:var(--faint)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top">
+      <img src="logo.png" alt="" />
+      <span class="word"><span class="a">U</span><span class="n">ni</span><span class="a">Q</span><span class="n">ue</span><span class="a">S</span></span>
+    </a>
+    <div class="spacer"></div>
+    <nav class="links">
+      <a href="#how">How it works</a>
+      <a href="#onprem">On-prem</a>
+      <a href="#honest">Honesty</a>
+      <a href="#assessment">Assessment</a>
+      <a href="https://github.com/DemigodDSK/quantumvault">GitHub</a>
+    </nav>
+    <a class="btn btn-primary" href="#assessment">Book an assessment</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero" style="padding:0">
+    <div class="glow"></div>
+    <div class="wrap hero-grid">
+      <div>
+        <span class="kicker"><span class="dot"></span>On-prem · post-quantum readiness</span>
+        <h1>Find the <span class="hl">quantum-vulnerable cryptography</span> in your codebase.</h1>
+        <p class="lead">UniQueS is the universal quantum scanner. It discovers RSA, ECC, DSA and Diffie-Hellman across every language you ship, scores them for post-quantum migration, and generates the <strong style="color:var(--text)">CBOM</strong> your regulators now require — all on-prem, so your source never leaves your network.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary btn-lg" href="#assessment">Book a readiness assessment</a>
+          <a class="btn btn-ghost btn-lg" href="https://demigoddsk.github.io/quantumvault/demo/">See the live demo</a>
+        </div>
+        <div class="trust">
+          <span>Open-source core</span><span class="sep">·</span><span>MIT licensed</span><span class="sep">·</span><span>runs inside your boundary</span><span class="sep">·</span><span>zero external dependencies</span>
+        </div>
+      </div>
+      <div class="hero-art">
+        <img src="logo.png" alt="UniQueS monogram" />
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOCK -->
+  <section style="padding:64px 0">
+    <div class="wrap">
+      <div class="split">
+        <div>
+          <div class="eyebrow">Harvest now, decrypt later</div>
+          <h2>The clock is already running.</h2>
+          <p class="section-lead" style="margin-bottom:0">Adversaries are recording your encrypted traffic <em>today</em> to decrypt the moment a cryptographically-relevant quantum computer exists. NIST has finalized the replacements (ML-KEM, ML-DSA, SLH-DSA) and CNSA 2.0 sets the deadlines. You can't migrate what you can't see — and the first thing every mandate asks for is an inventory of the cryptography you actually run.</p>
+        </div>
+        <div class="codecard" aria-hidden="true">
+          <div class="bar"><i></i><i></i><i></i></div>
+          <pre><span class="c-mut">$</span> uniques scan ./service <span class="c-acc">--assessment</span>
+<span class="c-mut"># scanning 14,212 files across 9 languages …</span>
+
+  <span class="c-warn">RSA</span>     payments/keys.go:41      <span class="c-acc">high</span>
+  <span class="c-warn">ECDSA</span>   auth/token.ts:88         <span class="c-acc">high</span>
+  <span class="c-warn">DH</span>      infra/tls.yaml:12        medium
+  <span class="c-mut">··· 23 actionable · 6 possible mentions</span>
+
+  <span class="c-acc">✓</span> CBOM written  cbom.cdx.json
+  <span class="c-acc">✓</span> Readiness report  assessment.html</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divide" />
+
+  <!-- HOW -->
+  <section id="how">
+    <div class="wrap">
+      <div class="eyebrow">How it works</div>
+      <h2>Discover. Prioritize. Prove.</h2>
+      <p class="section-lead">One scanner takes you from "we don't know what crypto we run" to an auditor-ready bill of materials — without sending a line of code anywhere.</p>
+      <div class="cards">
+        <div class="card">
+          <div class="step"><b>1</b> Discover</div>
+          <h3>Every language, every repo</h3>
+          <p>Scans source and Git repositories for quantum-vulnerable algorithms — RSA, ECC, DSA, Diffie-Hellman, legacy hashes and key material — across 15+ languages and your IaC.</p>
+        </div>
+        <div class="card">
+          <div class="step"><b>2</b> Prioritize</div>
+          <h3>Risk, with honest confidence</h3>
+          <p>Each finding gets a migration risk score and a confidence level. Real call-sites and key material are flagged as exposure; bare names in logs, configs and comments are separated as possible mentions — so the headline number is one you can trust.</p>
+        </div>
+        <div class="card">
+          <div class="step"><b>3</b> Prove</div>
+          <h3>The CBOM regulators ask for</h3>
+          <p>Generates a standards CycloneDX Cryptography Bill of Materials plus control-gap reports mapped to CNSA 2.0, NIST CSF, FISMA and more — the evidence your auditors and customers want.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divide" />
+
+  <!-- UNIVERSAL -->
+  <section id="universal">
+    <div class="wrap">
+      <div class="eyebrow">Universal</div>
+      <h2>One scanner for the whole codebase.</h2>
+      <p class="section-lead">"Universal" means language-universal: you run a single tool, not one per stack. UniQueS reads the crypto in everything you ship.</p>
+      <div class="langs">
+        <span class="chip">JavaScript</span><span class="chip">TypeScript</span><span class="chip">Python</span><span class="chip">Go</span><span class="chip">Java</span><span class="chip">C / C++</span><span class="chip">C#</span><span class="chip">Rust</span><span class="chip">Ruby</span><span class="chip">PHP</span><span class="chip">Swift</span><span class="chip">Kotlin</span><span class="chip">Scala</span><span class="chip">YAML / IaC</span><span class="chip">Terraform</span><span class="chip">PEM · JWK · SSH keys</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divide" />
+
+  <!-- ON-PREM -->
+  <section id="onprem">
+    <div class="wrap">
+      <div class="split">
+        <div>
+          <div class="eyebrow">On-prem by design</div>
+          <h2>Your source never leaves your network.</h2>
+          <p class="section-lead" style="margin-bottom:0">Crypto discovery means reading your most sensitive code. So UniQueS is built to run entirely inside your boundary — a single self-hostable binary with no external dependencies, no phone-home, and no cloud upload. The same architecture that makes it air-gap-friendly is the reason you can trust it with the source.</p>
+          <ul class="checks">
+            <li><span class="ic">✓</span><div><strong>Single-tenant, self-hosted.</strong> <span>You run it; nothing is sent out.</span></div></li>
+            <li><span class="ic">✓</span><div><strong>Air-gap ready.</strong> <span>Zero external deps, no network calls — works fully offline.</span></div></li>
+            <li><span class="ic">✓</span><div><strong>CLI, Docker &amp; CI.</strong> <span>Scan locally, in a container, or gate every pull request.</span></div></li>
+          </ul>
+        </div>
+        <div class="codecard" aria-hidden="true">
+          <div class="bar"><i></i><i></i><i></i></div>
+          <pre><span class="c-mut"># on-prem, in your CI — fail only on NEW crypto</span>
+<span class="c-mut">$</span> uniques scan . <span class="c-acc">--baseline</span> uniques.json <span class="c-acc">--fail-on</span> high
+
+  <span class="c-acc">✓</span> no new quantum-vulnerable crypto
+  <span class="c-acc">✓</span> CBOM conforms to CycloneDX 1.6
+  <span class="c-mut"># source stays in your network. always.</span></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divide" />
+
+  <!-- HONEST -->
+  <section id="honest">
+    <div class="wrap">
+      <div class="eyebrow">Honest by design</div>
+      <h2>A scanner that doesn't cry wolf.</h2>
+      <p class="section-lead">A crypto inventory is only useful if you can trust the count. UniQueS separates real exposure from incidental mentions, and its precision is measured against a public benchmark — not asserted.</p>
+      <div class="stats">
+        <div class="stat"><div class="n">15+</div><div class="l">languages scanned</div></div>
+        <div class="stat"><div class="n">7</div><div class="l">compliance frameworks</div></div>
+        <div class="stat"><div class="n">CycloneDX&nbsp;1.6</div><div class="l">CBOM, schema-verified</div></div>
+        <div class="stat"><div class="n">100%</div><div class="l">precision on the qbench corpus</div></div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divide" />
+
+  <!-- ASSESSMENT -->
+  <section id="assessment">
+    <div class="wrap">
+      <div class="offer">
+        <div>
+          <div class="eyebrow">Quantum Readiness Assessment</div>
+          <h2>Get your CBOM, fixed scope, on your network.</h2>
+          <p>We run UniQueS on your repository <strong style="color:var(--text)">inside your environment</strong>, hand-review the findings, and deliver a branded readiness report plus the standards CBOM your auditors expect. A fixed-scope engagement — no procurement marathon.</p>
+          <ul class="deliver">
+            <li>On-prem scan of your codebase — your source never leaves</li>
+            <li>CycloneDX CBOM + control-gap report (CNSA 2.0, NIST CSF, FISMA)</li>
+            <li>Prioritized migration worklist with analyst review</li>
+          </ul>
+        </div>
+        <div>
+          <div class="price"><span>from</span> <b>$2,500</b></div>
+          <p style="color:var(--muted);font-size:14px;margin:10px 0 20px">Starter · Standard · Enterprise scopes</p>
+          <a class="btn btn-primary btn-lg" style="width:100%;justify-content:center" href="mailto:dattasai293@gmail.com?subject=UniQueS%20Quantum%20Readiness%20Assessment&body=Hi%20—%20we%27d%20like%20a%20quantum%20readiness%20assessment.%20Our%20stack%2Frepo%3A%20___">Request an assessment</a>
+          <a class="btn btn-ghost btn-lg" style="width:100%;justify-content:center;margin-top:10px" href="https://demigoddsk.github.io/quantumvault/demo/">Try the live demo first</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <div class="brand"><img src="logo.png" alt="" style="height:22px" /> <span class="word"><span class="a">U</span><span class="n">ni</span><span class="a">Q</span><span class="n">ue</span><span class="a">S</span></span></div>
+      <div class="meta" style="margin-top:8px">The Universal Quantum Scanner · find quantum-vulnerable crypto in any codebase</div>
+    </div>
+    <div style="display:flex;gap:22px;align-items:center">
+      <a href="https://github.com/DemigodDSK/quantumvault">GitHub</a>
+      <a href="https://demigoddsk.github.io/quantumvault/demo/">Live demo</a>
+      <a href="mailto:dattasai293@gmail.com">Contact</a>
+    </div>
+  </div>
+  <div class="wrap" style="margin-top:18px"><div class="meta">© 2026 UniQueS · open-source core, MIT licensed.</div></div>
+</footer>
+
+</body>
+</html>
