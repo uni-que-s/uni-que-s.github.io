@@ -118,6 +118,23 @@
   .offer .deliver{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:10px;font-size:14.5px;color:var(--muted)}
   .offer .deliver li::before{content:"→";color:var(--accent);margin-right:9px}
 
+  /* pricing */
+  .tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:10px}
+  @media(max-width:980px){.tiers{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.tiers{grid-template-columns:1fr}}
+  .tier{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px;display:flex;flex-direction:column}
+  .tier.featured{border-color:var(--accent);background:linear-gradient(180deg,rgba(61,143,214,.09),var(--panel))}
+  .tier .badge{position:absolute;top:-11px;left:24px;background:var(--accent);color:var(--accent-ink);font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;padding:4px 11px;border-radius:999px}
+  .tier .tname{font-size:14px;font-weight:600;color:var(--text)}
+  .tier .tprice{font-size:30px;font-weight:700;letter-spacing:-.02em;margin:10px 0 2px}
+  .tier .tprice .per{font-size:14px;font-weight:500;color:var(--faint)}
+  .tier .tnote{font-size:13px;color:var(--faint);min-height:18px}
+  .tier ul{list-style:none;margin:16px 0 20px;padding:0;display:grid;gap:9px;font-size:13.5px;color:var(--muted)}
+  .tier ul li::before{content:"✓";color:var(--accent);margin-right:8px;font-weight:700}
+  .tier .btn{margin-top:auto;width:100%;justify-content:center}
+  .pricing-note{margin-top:26px;font-size:14px;color:var(--faint);text-align:center}
+  .pricing-note a{color:var(--accent);font-weight:500}
+
   /* footer */
   footer{border-top:1px solid var(--line);padding:46px 0 56px;color:var(--muted);font-size:14px}
   .foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
@@ -138,11 +155,11 @@
     <nav class="links">
       <a href="#how">How it works</a>
       <a href="#onprem">On-prem</a>
-      <a href="#honest">Honesty</a>
-      <a href="#assessment">Assessment</a>
-      <a href="https://github.com/DemigodDSK/quantumvault">GitHub</a>
+      <a href="#pricing">Pricing</a>
+      <a href="https://uni-que-s.github.io/uniques/demo/">Demo</a>
+      <a href="https://github.com/uni-que-s/uniques">GitHub</a>
     </nav>
-    <a class="btn btn-primary" href="#assessment">Book an assessment</a>
+    <a class="btn btn-primary" href="https://github.com/uni-que-s/uniques">Start free</a>
   </div>
 </header>
 
@@ -156,8 +173,8 @@
         <h1>Find the <span class="hl">quantum-vulnerable cryptography</span> in your codebase.</h1>
         <p class="lead">UniQueS is the universal quantum scanner. It discovers RSA, ECC, DSA and Diffie-Hellman across every language you ship, scores them for post-quantum migration, and generates the <strong style="color:var(--text)">CBOM</strong> your regulators now require — all on-prem, so your source never leaves your network.</p>
         <div class="cta-row">
-          <a class="btn btn-primary btn-lg" href="#assessment">Book a readiness assessment</a>
-          <a class="btn btn-ghost btn-lg" href="https://demigoddsk.github.io/quantumvault/demo/">See the live demo</a>
+          <a class="btn btn-primary btn-lg" href="https://github.com/uni-que-s/uniques">Start free — scan your code</a>
+          <a class="btn btn-ghost btn-lg" href="#pricing">See pricing</a>
         </div>
         <div class="trust">
           <span>Open-source core</span><span class="sep">·</span><span>MIT licensed</span><span class="sep">·</span><span>runs inside your boundary</span><span class="sep">·</span><span>zero external dependencies</span>
@@ -285,14 +302,77 @@
 
   <hr class="divide" />
 
-  <!-- ASSESSMENT -->
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="wrap">
+      <div class="eyebrow">Pricing</div>
+      <h2>Start free. License when you're ready.</h2>
+      <p class="section-lead">The scanner is open source and free forever. The on-prem platform — dashboard, continuous monitoring, compliance reporting — runs a 30-day trial inside your network, then a simple annual license. No data ever leaves your boundary, and no per-seat surprises.</p>
+      <div class="tiers">
+        <div class="tier">
+          <div class="tname">Open-source CLI</div>
+          <div class="tprice">$0</div>
+          <div class="tnote">Free forever · MIT</div>
+          <ul>
+            <li>The <span class="mono">uniques</span> scanner in CI</li>
+            <li>CBOM, SARIF, CSV &amp; JSON output</li>
+            <li>Fail-on-severity PR gating</li>
+            <li>Self-hosted, air-gappable</li>
+          </ul>
+          <a class="btn btn-ghost" href="https://github.com/uni-que-s/uniques">Get the CLI</a>
+        </div>
+        <div class="tier">
+          <div class="tname">Team</div>
+          <div class="tprice">$990<span class="per">/yr</span></div>
+          <div class="tnote">One estate · 30-day trial</div>
+          <ul>
+            <li>Full on-prem dashboard</li>
+            <li>Risk scoring &amp; migration tracking</li>
+            <li>Every export format</li>
+            <li>Community support</li>
+          </ul>
+          <a class="btn btn-primary" href="https://github.com/uni-que-s/uniques#quick-start--docker-one-command">Start free trial</a>
+        </div>
+        <div class="tier featured">
+          <div class="badge">Most popular</div>
+          <div class="tname">Business</div>
+          <div class="tprice">$4,990<span class="per">/yr</span></div>
+          <div class="tnote">Full estate · 30-day trial</div>
+          <ul>
+            <li>Everything in Team</li>
+            <li>All 7 compliance frameworks</li>
+            <li>Continuous monitoring &amp; drift</li>
+            <li>Email support</li>
+          </ul>
+          <a class="btn btn-primary" href="https://github.com/uni-que-s/uniques#quick-start--docker-one-command">Start free trial</a>
+        </div>
+        <div class="tier">
+          <div class="tname">Enterprise</div>
+          <div class="tprice">from $25k<span class="per">/yr</span></div>
+          <div class="tnote">Custom · air-gapped</div>
+          <ul>
+            <li>Everything in Business</li>
+            <li>Custom frameworks &amp; SLA</li>
+            <li>Air-gap deployment support</li>
+            <li>Onboarding assessment included</li>
+          </ul>
+          <a class="btn btn-ghost" href="mailto:dattasai293@gmail.com?subject=UniQueS%20Enterprise&body=Hi%20—%20we%27d%20like%20to%20talk%20about%20an%20Enterprise%20license.%20Our%20estate%3A%20___">Talk to us</a>
+        </div>
+      </div>
+      <p class="pricing-note">Every paid plan starts with a free 30-day on-prem trial — no card, no data leaving your network. Prefer done-for-you? <a href="#assessment">See the Quantum Readiness Assessment ↓</a></p>
+    </div>
+  </section>
+
+  <hr class="divide" />
+
+  <!-- ASSESSMENT (done-for-you upsell) -->
   <section id="assessment">
     <div class="wrap">
       <div class="offer">
         <div>
-          <div class="eyebrow">Quantum Readiness Assessment</div>
-          <h2>Get your CBOM, fixed scope, on your network.</h2>
-          <p>We run UniQueS on your repository <strong style="color:var(--text)">inside your environment</strong>, hand-review the findings, and deliver a branded readiness report plus the standards CBOM your auditors expect. A fixed-scope engagement — no procurement marathon.</p>
+          <div class="eyebrow">Done-for-you · optional</div>
+          <h2>Or have us run it for you.</h2>
+          <p>The fastest path is the free trial above. The <strong style="color:var(--text)">Quantum Readiness Assessment</strong> is the white-glove option: we run UniQueS on your repository <strong style="color:var(--text)">inside your environment</strong>, hand-review the findings, and deliver a branded readiness report plus the standards CBOM your auditors expect — a fixed-scope engagement, no procurement marathon.</p>
           <ul class="deliver">
             <li>On-prem scan of your codebase — your source never leaves</li>
             <li>CycloneDX CBOM + control-gap report (CNSA 2.0, NIST CSF, FISMA)</li>
@@ -301,9 +381,12 @@
         </div>
         <div>
           <div class="price"><span>from</span> <b>$2,500</b></div>
-          <p style="color:var(--muted);font-size:14px;margin:10px 0 20px">Starter · Standard · Enterprise scopes</p>
-          <a class="btn btn-primary btn-lg" style="width:100%;justify-content:center" href="mailto:dattasai293@gmail.com?subject=UniQueS%20Quantum%20Readiness%20Assessment&body=Hi%20—%20we%27d%20like%20a%20quantum%20readiness%20assessment.%20Our%20stack%2Frepo%3A%20___">Request an assessment</a>
-          <a class="btn btn-ghost btn-lg" style="width:100%;justify-content:center;margin-top:10px" href="https://demigoddsk.github.io/quantumvault/demo/">Try the live demo first</a>
+          <p style="color:var(--muted);font-size:14px;margin:10px 0 14px">Starter · Standard · Enterprise scopes</p>
+          <div style="margin:0 0 18px;padding:11px 13px;border:1px solid rgba(61,143,214,.3);background:rgba(61,143,214,.08);border-radius:11px;font-size:13.5px;line-height:1.5">
+            <strong style="color:var(--accent)">★ Founding offer</strong> — first 3 only: <strong style="color:var(--text)">$1,500</strong>, or <strong style="color:var(--text)">free</strong> for a design partner who'll be a reference.
+          </div>
+          <a class="btn btn-primary btn-lg" style="width:100%;justify-content:center" href="mailto:dattasai293@gmail.com?subject=UniQueS%20Quantum%20Readiness%20Assessment%20(founding%20offer)&body=Hi%20—%20we%27d%20like%20a%20quantum%20readiness%20assessment.%20Our%20stack%2Frepo%3A%20___">Request an assessment</a>
+          <a class="btn btn-ghost btn-lg" style="width:100%;justify-content:center;margin-top:10px" href="https://uni-que-s.github.io/uniques/demo/">Try the live demo first</a>
         </div>
       </div>
     </div>
@@ -317,8 +400,8 @@
       <div class="meta" style="margin-top:8px">The Universal Quantum Scanner · find quantum-vulnerable crypto in any codebase</div>
     </div>
     <div style="display:flex;gap:22px;align-items:center">
-      <a href="https://github.com/DemigodDSK/quantumvault">GitHub</a>
-      <a href="https://demigoddsk.github.io/quantumvault/demo/">Live demo</a>
+      <a href="https://github.com/uni-que-s/uniques">GitHub</a>
+      <a href="https://uni-que-s.github.io/uniques/demo/">Live demo</a>
       <a href="mailto:dattasai293@gmail.com">Contact</a>
     </div>
   </div>
