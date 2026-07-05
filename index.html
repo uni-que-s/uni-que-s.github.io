@@ -155,6 +155,7 @@
     <nav class="links">
       <a href="#how">How it works</a>
       <a href="#onprem">On-prem</a>
+      <a href="#benchmarks">Benchmarks</a>
       <a href="#pricing">Pricing</a>
       <a href="https://uni-que-s.github.io/uniques/demo/">Demo</a>
       <a href="https://github.com/uni-que-s/uniques">GitHub</a>
@@ -285,17 +286,35 @@
 
   <hr class="divide" />
 
-  <!-- HONEST -->
-  <section id="honest">
+  <!-- BENCHMARKS & STANDARDS (Honest by design) -->
+  <section id="benchmarks">
     <div class="wrap">
-      <div class="eyebrow">Honest by design</div>
+      <div class="eyebrow">Honest by design — benchmarks &amp; standards</div>
       <h2>A scanner that doesn't cry wolf.</h2>
-      <p class="section-lead">A crypto inventory is only useful if you can trust the count. UniQueS separates real exposure from incidental mentions, and its precision is measured against a public benchmark — not asserted.</p>
+      <p class="section-lead">A crypto inventory is only useful if you can trust the count. UniQueS is measured against public benchmarks with every label published — not asserted. When fuller labeling made an earlier number worse, we restated it publicly; the report shows every movement, in both directions.</p>
       <div class="stats">
-        <div class="stat"><div class="n">15+</div><div class="l">languages scanned</div></div>
-        <div class="stat"><div class="n">7</div><div class="l">compliance frameworks</div></div>
+        <div class="stat"><div class="n">95.7%</div><div class="l">measured precision — 20-repo public corpus</div></div>
+        <div class="stat"><div class="n">68/68</div><div class="l">NIST SARD recall, in-scope cases</div></div>
+        <div class="stat"><div class="n">100%</div><div class="l">of actionable findings hand-labeled &amp; published</div></div>
         <div class="stat"><div class="n">CycloneDX&nbsp;1.6</div><div class="l">CBOM, schema-verified</div></div>
-        <div class="stat"><div class="n">100%</div><div class="l">precision on the qbench corpus</div></div>
+      </div>
+      <div class="cards" style="margin-top:18px">
+        <div class="card">
+          <h3>Real repos, pinned &amp; labeled</h3>
+          <p>Precision is scored on 20 pinned public codebases — vault, gitea, caddy, openssh, pyca and more — with every actionable finding hand-adjudicated and the labels committed next to the code. Vault alone: 94.5%.</p>
+        </div>
+        <div class="card">
+          <h3>Re-ranked, never hidden</h3>
+          <p>Context demotions (like a bare <code>import "crypto/rsa"</code> line) move findings to an informational tier with a machine-readable reason — in the dashboard, JSON, SARIF, CSV and CBOM alike. Nothing is silently dropped.</p>
+        </div>
+        <div class="card">
+          <h3>Standards-native</h3>
+          <p>CycloneDX 1.6 CBOM (ECMA-424) for auditors, SARIF for code scanning, and findings mapped against NIST FIPS 203/204/205 and CNSA&nbsp;2.0 migration timelines.</p>
+        </div>
+      </div>
+      <div class="cta-row" style="margin-top:26px">
+        <a class="btn btn-ghost" href="https://github.com/uni-que-s/uniques/blob/main/bench/REPORT.md">Read the full benchmark report</a>
+        <a class="btn btn-ghost" href="https://github.com/uni-que-s/uniques/tree/main/bench">Reproduce it yourself</a>
       </div>
     </div>
   </section>
